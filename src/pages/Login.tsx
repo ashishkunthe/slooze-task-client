@@ -1,16 +1,30 @@
+import axios from "axios";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+const URL = import.meta.env.VITE_BACKEND_URL;
 
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    console.log({ email, password });
+    try {
+      const response = await axios.post(`${URL}/auth/login`, {
+        email,
+        password,
+      });
+      const { token } = response.data;
 
-    // You can now send this to your login API or validate it
+      localStorage.setItem("token", token);
+      navigate("/menu");
+    } catch (error: any) {
+      console.error("Login error:", error.response?.data || error.message);
+      alert("Failed to login. Please try again.");
+    }
   };
 
   return (
