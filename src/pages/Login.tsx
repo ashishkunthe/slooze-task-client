@@ -54,6 +54,15 @@ function Login() {
         >
           Login
         </button>
+        <div className="text-center text-sm text-gray-600">
+          New user?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-orange-600 font-medium cursor-pointer hover:underline"
+          >
+            Register here
+          </span>
+        </div>
       </div>
     </div>
   );
