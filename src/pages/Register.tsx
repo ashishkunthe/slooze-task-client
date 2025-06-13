@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
-import dotenv from "dotenv";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-dotenv.config();
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
