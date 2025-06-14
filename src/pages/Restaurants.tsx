@@ -20,7 +20,7 @@ function Restaurants() {
     const response = await axios.get(`${URL}/restaurants`, {
       headers: { Authorization: token },
     });
-    const { restaurants } = response.data;
+    const restaurants = response.data;
     setRestaurants(restaurants);
   }
 

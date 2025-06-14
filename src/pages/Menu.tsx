@@ -31,8 +31,11 @@ function Menu() {
         headers: { Authorization: localStorage.getItem("token") },
       }
     );
-    const { menuItems } = response.data;
+    console.log(response.data);
+    const menuItems = await response.data;
     setMenu(menuItems);
+    console.log(restaurantId);
+    console.log(menuItems);
   }
 
   useEffect(() => {
@@ -70,7 +73,7 @@ function Menu() {
         }
       );
 
-      alert("Order placed!");
+      alert(response.data.message);
       setOrderItems([]);
     } catch (err) {
       console.error("Order failed", err);

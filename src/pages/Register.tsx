@@ -31,7 +31,7 @@ function Register() {
       const data = (await response).data;
       const token = data.token;
       localStorage.setItem("token", token);
-      navigate("/menu");
+      navigate("/restaurants");
     } catch (error: any) {
       console.error(
         "Registration error:",

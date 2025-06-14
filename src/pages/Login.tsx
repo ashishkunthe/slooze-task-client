@@ -20,7 +20,7 @@ function Login() {
       const { token } = response.data;
 
       localStorage.setItem("token", token);
-      navigate("/menu");
+      navigate("/restaurants");
     } catch (error: any) {
       console.error("Login error:", error.response?.data || error.message);
       alert("Failed to login. Please try again.");
