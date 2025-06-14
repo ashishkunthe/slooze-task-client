@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -15,12 +16,20 @@ interface Order {
 function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [newPayments, setNewPayments] = useState<{ [key: string]: string }>({});
+  const navigate = useNavigate();
+  const [accessDenied, setAccessDenied] = useState(false);
 
   async function fetchOrders() {
     try {
       const res = await axios.get(`${URL}/orders`, {
         headers: { Authorization: localStorage.getItem("token") },
       });
+
+      if (res.data?.message) {
+        setAccessDenied(true);
+        return;
+      }
+
       setOrders(res.data);
     } catch (err) {
       alert("Failed to fetch orders");
@@ -74,8 +83,50 @@ function Orders() {
     fetchOrders();
   }, []);
 
+  if (accessDenied) {
+    return (
+      <div className="min-h-screen bg-orange-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-xl font-bold text-red-600">Access Denied 🚫</h1>
+          <p className="text-gray-700 mt-2">
+            Only admins and managers can access this page.
+          </p>
+          <button
+            onClick={() => navigate("/restaurants")}
+            className="mt-4 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg"
+          >
+            Back to Restaurants
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen p-6 bg-orange-50">
+      <div className="mb-4">
+        <button
+          onClick={() => navigate("/restaurants")}
+          className="flex items-center text-orange-600 hover:text-orange-800"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-5 h-5 mr-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+          Back
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold text-orange-600 text-center mb-8">
         All Orders
       </h1>

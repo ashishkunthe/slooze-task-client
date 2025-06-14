@@ -83,6 +83,29 @@ function Menu() {
 
   return (
     <div className="min-h-screen bg-orange-50 p-6">
+      <div className="mb-4">
+        <button
+          onClick={() => window.history.back()}
+          className="flex items-center text-orange-600 hover:text-orange-800"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-5 h-5 mr-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+          Back
+        </button>
+      </div>
+
       <h1 className="text-3xl font-bold text-orange-600 text-center mb-8">
         Restaurant Menu 🍽️
       </h1>
