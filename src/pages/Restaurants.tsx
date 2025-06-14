@@ -38,6 +38,15 @@ function Restaurants() {
         Explore Restaurants
       </h1>
 
+      <div className="flex justify-center mb-6">
+        <button
+          onClick={() => navigate("/orders")}
+          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm"
+        >
+          View Orders
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {restaurants.map((restaurant, index) => (
           <div

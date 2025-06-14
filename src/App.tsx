@@ -5,6 +5,7 @@ import Menu from "./pages/Menu";
 import Welcome from "./pages/Welcome";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Restaurants from "./pages/Restaurants";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         /> */}
         <Route path="/restaurants" element={<Restaurants />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
     </BrowserRouter>
   );
