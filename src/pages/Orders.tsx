@@ -162,20 +162,21 @@ function Orders() {
 
             <div className="flex flex-wrap gap-2 mt-2">
               {order.status === "created" && (
-                <>
-                  <button
-                    onClick={() => checkoutOrder(order._id)}
-                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
-                  >
-                    Checkout
-                  </button>
-                  <button
-                    onClick={() => cancelOrder(order._id)}
-                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-                  >
-                    Cancel
-                  </button>
-                </>
+                <button
+                  onClick={() => checkoutOrder(order._id)}
+                  className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
+                >
+                  Checkout
+                </button>
+              )}
+
+              {order.status !== "cancelled" && (
+                <button
+                  onClick={() => cancelOrder(order._id)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                >
+                  Cancel
+                </button>
               )}
 
               <select
