@@ -1,54 +1,72 @@
-# React + TypeScript + Vite
+# 🍽️ Slooze Frontend — Food Ordering App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Slooze Take-Home Assignment, built using **React**, **Vite**, **TypeScript**, and **TailwindCSS**. It connects to the backend API and handles user authentication, role-based UI access, and the full food ordering flow.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ Tech Stack
 
-## Expanding the ESLint configuration
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS
+- Axios (for API requests)
+- JWT Auth via localStorage
+- Role & Region-based UI rendering
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🧪 Features
+
+- Register/Login with roles: `admin`, `manager`, `member`
+- Restaurant list fetched based on region
+- Menu viewing and item selection per restaurant
+- Quantity-based cart functionality
+- Select payment method (Cash, Card, UPI)
+- Place order with cart items
+- Checkout, cancel, and update payment method (admin/manager only)
+- Member-restricted access to orders page (Access Denied UI)
+- Navigation support (Back buttons to restaurants)
+
+---
+
+## 🔐 Role-Based UI Access
+
+| Role    | Can View Restaurants | Can View Menus | Can View Orders | Can Checkout/Cancel/Update Payment |
+| ------- | -------------------- | -------------- | --------------- | ---------------------------------- |
+| Admin   | ✅ Yes               | ✅ Yes         | ✅ Yes          | ✅ Yes                             |
+| Manager | ✅ Yes               | ✅ Yes         | ✅ Yes (region) | ✅ Yes (region only)               |
+| Member  | ✅ Yes               | ✅ Yes         | ❌ No           | ❌ No                              |
+
+---
+
+## 🧰 Setup & Run
+
+```bash
+git clone https://github.com/ashishkunthe/slooze-task-client.git
+cd slooze-task-client
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🌐 Environment Variable
+Create a .env file in the root:
+VITE_BACKEND_URL=http://localhost:5000/api
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Folder Structure
+src/
+├── pages/
+│ ├── Login.tsx
+│ ├── Register.tsx
+│ ├── Restaurants.tsx
+│ ├── Menu.tsx
+│ └── Orders.tsx
+├── components/
+│ └── ProtectedRoute.tsx
+├── App.tsx
+├── main.tsx
+🔗 Backend Repository
+You can find the backend code here:
+👉 https://github.com/ashishkunthe/slooze-task-server
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Author
+Made with 💙 by Ashish Kunthe
