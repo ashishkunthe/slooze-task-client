@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Menu from "./pages/Menu";
 import Welcome from "./pages/Welcome";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Restaurants from "./pages/Restaurants";
 
 function App() {
   return (
@@ -13,14 +14,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        <Route
+        {/* <Route
           path="/menu"
           element={
             <ProtectedRoute>
               <Menu />
             </ProtectedRoute>
           }
-        />
+        /> */}
+        <Route path="/restaurants" element={<Restaurants />} />
+        <Route path="/menu" element={<Menu />} />
       </Routes>
     </BrowserRouter>
   );
