@@ -11,21 +11,36 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Welcome />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {/* <Route
+        {/* Protected routes */}
+        <Route
+          path="/restaurants"
+          element={
+            <ProtectedRoute>
+              <Restaurants />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/menu"
           element={
             <ProtectedRoute>
               <Menu />
             </ProtectedRoute>
           }
-        /> */}
-        <Route path="/restaurants" element={<Restaurants />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/orders" element={<Orders />} />
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
