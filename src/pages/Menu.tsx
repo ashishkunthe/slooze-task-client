@@ -23,6 +23,7 @@ function Menu() {
   const [searchParams] = useSearchParams();
   const restaurantId = searchParams.get("restaurantId");
   const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [regionMismatch, setRegionMismatch] = useState(false);
 
   async function getMenuItems() {
     const response = await axios.get(
@@ -32,6 +33,10 @@ function Menu() {
       }
     );
     console.log(response.data);
+    if (response.data.message === "Access denied: region mismatch") {
+      setRegionMismatch(true);
+      return;
+    }
     const menuItems = await response.data;
     setMenu(menuItems);
     console.log(restaurantId);
@@ -79,6 +84,39 @@ function Menu() {
       console.error("Order failed", err);
       alert("Order failed");
     }
+  }
+
+  {
+    if (regionMismatch)
+      return (
+        <>
+          <div className="mb-4">
+            <button
+              onClick={() => window.history.back()}
+              className="flex items-center text-orange-600 hover:text-orange-800"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5 mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+              Back
+            </button>
+          </div>
+          <div className="text-center text-red-600 font-semibold mb-6">
+            🚫 You can't order from this restaurant due to region restrictions.
+          </div>
+        </>
+      );
   }
 
   return (
